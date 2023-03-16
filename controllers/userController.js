@@ -10,5 +10,6 @@ const userDB = {
   },
 };
 
-// 왜 callback으로 받았는가
 module.exports = userDB;
+
+// 데이터를 받아오는 것 까지만 함

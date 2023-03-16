@@ -10,3 +10,5 @@ router.get('/', (req, res) => {
 });
 
 module.exports = router;
+
+// 해당 데이터를 출력
