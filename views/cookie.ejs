@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>쿠키 팔아요!</h1>
+  <input type="checkbox" name="check" id="check" />
+  <label for="check">ALERT 하루동안 보지 않기!</label>
+
+  <script>
+    if (!document.cookie) alert('쿠키 팔아요!')
+    const checkBox = document.getElementById('check')
+    checkBox.addEventListener('click', () => {
+      //백엔드에 쿠키 발행을 요청하는 코드 작성하기  
+      fetch(`http://localhost:4000/cookie/cook`, {
+        method: 'get',
+        headers: {
+          'Content-type': 'application/json',
+        },
+      }).then((res) => {
+        location.href = '/cookie/cook'
+      })
+    })
+
+    // 함수안에 쓸수 있는것들 
+    if (checkBox.checked) {
+      fetch(`/cookie/cook`, {
+        method: 'get',
+        headers: {
+          'Content-type': 'application/json'
+        },
+      }).theon((res) => {
+        console.log('Response', res);
+        res.json();
+      }).then((msg) => {
+        console.log('Message', msg);
+      })
+    }
+
+
+    checkBox.addEventListener('click', async () => {
+          if (checkBox.checked) {
+            const res = awaite fetch(`/cookie/cook`, {
+              method: 'get',
+              headers: {
+                'Content-type': 'application/json'
+              },
+            });
+            console.log(res);
+            const msg = await res.json();
+            console.log(msg);
+          }
+        }
+  </script>
+</body>
+
+</html>
