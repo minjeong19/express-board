@@ -21,7 +21,7 @@ router.get('/', isLogin, (req, res) => {
     // console.log(data);
     const ARTICLE = data;
     const articleCounts = ARTICLE.length;
-    const userId = req.session.userId;
+    const { userId } = req.session;
     res.render('db_board', { ARTICLE, articleCounts, userId });
   });
 });
