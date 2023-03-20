@@ -1,7 +1,7 @@
 const connection = require('./dbConnect');
 
 const userDB = {
-  //중복 회원 찾기
+  // 중복 회원 찾기
   userCheck: (userId, cb) => {
     connection.query(
       `SELECT * FROM mydb.user WHERE USERID = '${userId}';`,
