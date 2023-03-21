@@ -1,11 +1,12 @@
 const express = require('express');
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const session = require('express-session');
+require('dotenv').config();
 
 const app = express();
-const PORT = 4000;
+const { PORT } = process.env;
 
 app.use(cors());
 app.set('view engine', 'ejs');
@@ -13,7 +14,7 @@ app.use(express.static('public'));
 // 위에 써줘야함 순서 매우 중요
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('mj'));
 app.use(
   session({
     secret: '1234',

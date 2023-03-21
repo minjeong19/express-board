@@ -8,51 +8,28 @@ const client = new MongoClient(uri, {
   serverApi: ServerApiVersion.v1,
 });
 
-// insertOne쿼리
-async function main() {
-  try {
-    await client.connect();
-
-    const test = client.db('kdt5').collection('test');
-    await test.deleteMany({});
-
-    await test.insertMany([
-      { name: 'pororo', age: 5 },
-      { name: 'loopy', age: 6 },
-      { name: 'crong', age: 4 },
-    ]);
-
-    const findCursor = test.find({ age: { $gte: 5 } });
-    const dataArr = await findCursor.toArray();
-    return dataArr;
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-main();
-
 // insertOne 쿼리
-// client.connect((err) => {
-//   const test = client.db('kdt5').collection('test');
-//   console.log(test);
-//   // perform actions on the collection object
-//   test.deleteMany({}, (deleteErr, deleteResult) => {
-//     if (deleteErr) throw deleteErr;
-//     console.log(deleteResult);
 
-//     test.insertOne(
-//       {
-//         name: 'pororo',
-//         age: 5,
-//       },
-//       (insertErr, insertResult) => {
-//         if (insertErr) throw insertErr;
-//         console.log(insertResult);
-//       },
-//     );
-//   });
-// });
+client.connect((err) => {
+  const test = client.db('kdt5').collection('test');
+  console.log(test);
+  // perform actions on the collection object
+  test.deleteMany({}, (deleteErr, deleteResult) => {
+    if (deleteErr) throw deleteErr;
+    console.log(deleteResult);
+
+    test.insertOne(
+      {
+        name: 'pororo',
+        age: 5,
+      },
+      (insertErr, insertResult) => {
+        if (insertErr) throw insertErr;
+        console.log(insertResult);
+      },
+    );
+  });
+});
 
 // deleteMany 쿼리
 
