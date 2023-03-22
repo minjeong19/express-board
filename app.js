@@ -14,7 +14,7 @@ app.use(express.static('public'));
 // 위에 써줘야함 순서 매우 중요
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser('mj'));
+app.use(cookieParser('1234'));
 app.use(
   session({
     secret: '1234',
