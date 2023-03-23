@@ -12,6 +12,15 @@ router.get('/', (req, res) => {
 // 로그인
 router.post('/', loginUser);
 
+// 로그아웃
+router.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) throw err;
+    res.clearCookie('user'); // 내가 만든 cookie key 이름
+    res.redirect('/');
+  });
+});
+
 module.exports = router;
 
 // router.post('/', (req, res) => {
@@ -43,15 +52,6 @@ module.exports = router;
 //         '해당 ID가 존재 하지 않습니다!<br><a href="/register">회원가입으로 이동</a>',
 //       );
 //     }
-//   });
-// });
-
-// // 로그아웃
-// router.get('/logout', (req, res) => {
-//   req.session.destroy((err) => {
-//     if (err) throw err;
-//     res.clearCookie('user'); // 내가 만든 cookie key 이름
-//     res.redirect('/');
 //   });
 // });
 

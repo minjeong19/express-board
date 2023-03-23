@@ -10,6 +10,7 @@ const { PORT } = process.env;
 
 app.use(cors());
 app.set('view engine', 'ejs');
+app.use('/uploads', express.static('uploads'));
 app.use(express.static('public'));
 // 위에 써줘야함 순서 매우 중요
 app.use(bodyParser.json());

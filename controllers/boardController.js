@@ -30,10 +30,13 @@ const writeArticle = async (req, res) => {
     const client = await mongoClient.connect();
     const board = client.db('kdt5').collection('board');
 
+    console.log(req.file);
+
     const newArticle = {
       USERID: req.session.userId,
       TITLE: req.body.title,
       CONTENT: req.body.content,
+      IMAGE: req.file ? req.file.filename : null,
     };
     await board.insertOne(newArticle);
     res.redirect('/dbBoard');
@@ -59,14 +62,28 @@ const getArticle = async (req, res) => {
   }
 };
 
+// 글 수정하기
 const modifyArticle = async (req, res) => {
   try {
     const client = await mongoClient.connect();
     const board = client.db('kdt5').collection('board');
 
+    console.log(req.file);
+
+    const modify = {
+      TITLE: req.body.title,
+      CONTENT: req.body.content,
+    };
+    if (req.file) modify.IMAGE = req.file.filename;
+
     await board.updateOne(
       { _id: ObjectId(req.params.id) },
-      { $set: { TITLE: req.body.title, CONTENT: req.body.content } },
+      {
+        $set: modify,
+        // TITLE: req.body.title,
+        // CONTENT: req.body.content,
+        // IMAGE: req.file ? req.file.filename : orginArticle.IMAGE,
+      },
     );
     res.status(200);
     res.redirect('/dbBoard');
